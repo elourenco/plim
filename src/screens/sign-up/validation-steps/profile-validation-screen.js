@@ -29,10 +29,13 @@ class ProfileValidationScreen extends Component {
   }
 
   signUpAndNextPreprocess() {
+    this.props.signUpProfile(this.state).then(profile => {
+      console.log('>>>>> ', profile);
+    })
     // this.props.saveState(0, { key: '0' });
     // this.props.nextFn();
-    this.props.signUpProfile(this.state);
   }
+
   previousPreprocess() {
     this.props.prevFn();
   }
@@ -47,39 +50,41 @@ class ProfileValidationScreen extends Component {
   }
 
   renderErrorMessage() {
-    const { error, loading } = this.props;
+    const { error, loading } = this.props.profile;
     if (error && !loading) {
       return <Text>{error}</Text>
     }
     return <Text />
   }
-;
+  ;
   render() {
     return (
       <View style={{ margin: 10 }}>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >CPF</Label>
-          <Input style={{ color: 'white' }} keyboardType="numeric" 
-          value={this.state.cpf}
-          onChangeText={(text) => this.setState({ cpf: text })}/>
+          <Input style={{ color: 'white' }}
+            keyboardType="numeric"
+            value={this.state.cpf}
+            onChangeText={(text) => this.setState({ cpf: text })} />
         </Item>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >Nome completo</Label>
-          <Input style={{ color: 'white' }} 
-          value={this.state.name}
-          onChangeText={(text) => this.setState({ name: text })}/>
+          <Input style={{ color: 'white' }}
+            value={this.state.name}
+            onChangeText={(text) => this.setState({ name: text })} />
         </Item>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >E-mail</Label>
           <Input style={{ color: 'white' }}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          value={this.state.email}
-          onChangeText={(text) => this.setState({ email: text })} />
+            autoCapitalize="none"
+            keyboardType="email-address"
+            value={this.state.email}
+            onChangeText={(text) => this.setState({ email: text })} />
         </Item>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >Senha</Label>
           <Input style={{ color: 'white' }}
+            keyboardType="default"
             secureTextEntry={true}
             value={this.state.password}
             onChangeText={(text) => this.setState({ password: text })} />
@@ -92,7 +97,11 @@ class ProfileValidationScreen extends Component {
             value={this.state.confPassword}
             onChangeText={(text) => this.setState({ confPassword: text })} />
         </Item>
-        <Button style={{ marginTop: 50 }} disabled={this.checkProperties(this.state)} full rounded onPress={() => this.signUpAndNextPreprocess()} >
+        <Button style={{ marginTop: 50 }}
+          disabled={this.checkProperties(this.state)}
+          full
+          rounded
+          onPress={() => this.signUpAndNextPreprocess()} >
           {this.renderLoadingInButton()}
         </Button>
         <Text>{this.renderErrorMessage()}</Text>

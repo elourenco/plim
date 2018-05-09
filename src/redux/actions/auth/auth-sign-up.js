@@ -25,33 +25,17 @@ const stateSignFailed = (error) => {
 }
 
 const signUpProfile = (profile) => {
-  return (dispatch) => {
-
-    dispatch(stateSignUpValidate());
-
-    firebase.auth
-      .createUserWithEmailAndPassword(profile.email, profile.password)
-      .then(user => {
-        
-        const { cpf, name, email} = profile;
-
-        user.updateProfile({ displayName: name });
-        
-        console.log('>>>> Profile: ', profile);
-        
-        firebase.firestore.collection('profiles')
-          .doc(user.uid)
-          .set({ cpf, name, email })
-          .then(data => {
-            dispatch(stateSignUpProfile({ cpf, name, email}));
-          })
-          .catch(err => {
-            dispatch(stateSignFailed(err));
-          });
-      })
-      .catch(err => {
-        dispatch(stateSignFailed(err));
-      })
+  return async (dispatch) => {
+    try {
+      const { cpf, name, email } = profile;
+      dispatch(stateSignUpValidate());
+      const user = await firebase.auth.createUserWithEmailAndPassword(profile.email, profile.password)
+      const profileDb = await firebase.firestore.collection('profiles').doc(user.uid).set({ cpf, name, email })
+      dispatch(stateSignUpProfile({ cpf, name, email}));
+    }
+    catch(e) {
+      dispatch(stateSignFailed(e));
+    }
   };
 };
 

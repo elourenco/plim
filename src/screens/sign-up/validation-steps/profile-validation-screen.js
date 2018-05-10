@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, ActivityIndicator
+  View, ActivityIndicator, Alert
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { Button, Item, Input, Label, Text } from 'native-base';
@@ -21,7 +21,7 @@ class ProfileValidationScreen extends Component {
 
   checkProperties(obj) {
     for (var key in obj) {
-      if (obj[key] !== null && obj[key] != "") {
+      if (obj[key] !== null && obj[key] !== "") {
         return false;
       }
     }
@@ -29,12 +29,18 @@ class ProfileValidationScreen extends Component {
   }
 
   signUpAndNextPreprocess() {
-    this.props.signUpProfile(this.state)
-      .then(() => {
+    if (!this.checkProperties(this.state)) {
+      this.props.signUpProfile(this.state)
+      .then(() => this.props.nextFn());
       // this.props.saveState(1, { key: '1' });
-        this.props.nextFn();
-    })
-
+    } else {
+      Alert.alert('Cadastro', 'Por favor, preencha todos os campos.',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')}
+        ],
+        { cancelable: false }
+      )
+    }
   }
 
   previousPreprocess() {
@@ -112,7 +118,7 @@ class ProfileValidationScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.signUp
+    profile: state.profile
   };
 }
 

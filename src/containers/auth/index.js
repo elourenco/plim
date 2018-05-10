@@ -14,7 +14,6 @@ export default StackNavigator(
       gesturesEnabled: false,
       showLabel: false,
       headerTintColor: '#ffff',
-      headerTitle: 'Plimm',
       headerStyle: {
         backgroundColor: '#0084ec',
         borderBottomWidth: 0

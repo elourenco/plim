@@ -6,5 +6,5 @@ import signUp from './auth/auth-sign-up-reducer';
 export default combineReducers({
   application,
   nav,
-  signUp
+  profile: signUp
 });

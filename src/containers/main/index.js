@@ -42,7 +42,10 @@ const configTabNavigator = {
     },
     style: {
       backgroundColor: '#fff',
-      borderTopWidth: 0
+      borderTopWidth: 0,
+      shadowOffset: { width: 0, height: 0 },
+      shadowColor: '#0084ec',
+      shadowOpacity: 0.3
     },
     pressOpacity: 2,
     animationEnabled: true

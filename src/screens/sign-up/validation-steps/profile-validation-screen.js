@@ -29,11 +29,12 @@ class ProfileValidationScreen extends Component {
   }
 
   signUpAndNextPreprocess() {
-    this.props.signUpProfile(this.state).then(profile => {
-      console.log('>>>>> ', profile);
+    this.props.signUpProfile(this.state)
+      .then(() => {
+      // this.props.saveState(1, { key: '1' });
+        this.props.nextFn();
     })
-    // this.props.saveState(0, { key: '0' });
-    // this.props.nextFn();
+
   }
 
   previousPreprocess() {
@@ -100,7 +101,6 @@ class ProfileValidationScreen extends Component {
         <Button style={{ marginTop: 50 }}
           disabled={this.checkProperties(this.state)}
           full
-          rounded
           onPress={() => this.signUpAndNextPreprocess()} >
           {this.renderLoadingInButton()}
         </Button>

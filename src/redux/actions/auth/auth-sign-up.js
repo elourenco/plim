@@ -2,8 +2,6 @@ import packageInfo from '../../../../package.json';
 import typesAuthActions from './auth-types';
 import firebase from '../../../config/firebase';
 
-
-
 const stateSignUpValidate = () => {
   return {
     type: typesAuthActions.SIGN_UP_VALIDATE
@@ -31,7 +29,9 @@ const signUpProfile = (profile) => {
       dispatch(stateSignUpValidate());
       const user = await firebase.auth.createUserWithEmailAndPassword(profile.email, profile.password)
       const profileDb = await firebase.firestore.collection('profiles').doc(user.uid).set({ cpf, name, email })
-      dispatch(stateSignUpProfile({ cpf, name, email}));
+      if (user) {
+        dispatch(stateSignUpProfile({ cpf, name, email}));
+      }
     }
     catch(e) {
       dispatch(stateSignFailed(e));

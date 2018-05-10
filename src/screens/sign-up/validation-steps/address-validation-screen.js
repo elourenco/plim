@@ -10,7 +10,7 @@ class AddressValidationScreen extends Component {
   }
 
   nextPreprocess() {
-    this.props.saveState(0, { key: '0' });
+    // this.props.saveState(1, { key: '1' });
     this.props.nextFn();
   }
   previousPreprocess() {

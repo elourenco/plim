@@ -18,12 +18,12 @@ class IntroductionScreen extends Component {
     return (
       <LinearGradient colors={['#0084ec', '#00b9fa', '#fff']} style={styles.container}>
         <View style={styles.tools}>
-          <Button style={{ margin: 10 }} full rounded warning onPress={() => this.signUpOnPress()} >
-            <Text>Cadastrar</Text>
-          </Button>
-          <Button style={{ margin: 10 }} full rounded primary onPress={() => this.signInOnPress()} >
+        <Button style={{ margin: 10 }} full primary onPress={() => this.signInOnPress()} >
             <Text>Acessar</Text>
           </Button>
+          <Button style={{ margin: 10 }} full info onPress={() => this.signUpOnPress()} >
+            <Text>Cadastrar</Text>
+        </Button>
         </View>
       </LinearGradient>
     );

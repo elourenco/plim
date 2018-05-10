@@ -13,9 +13,7 @@ class SignUpScreen extends Component {
   componentWillMount() {
     this.stepsScreens = [
       { name: 'ProfileValidationScreen', component: <ProfileValidationScreen /> },
-      { name: 'AddressValidationScreen', component: <AddressValidationScreen /> },
-      { name: 'NumberCellValidationScreen', component: <NumberCellValidationScreen /> },
-      { name: 'SMSTokenReceiverValidationScreen', component: <SMSTokenReceiverValidationScreen /> },
+      { name: 'AddressValidationScreen', component: <AddressValidationScreen /> }
     ];
   }
 
@@ -24,6 +22,8 @@ class SignUpScreen extends Component {
   }
 
   render() {
+    console.log(this.stepsScreens);
+    
     return (
       <LinearGradient colors={['#0084ec', '#00b9fa', '#fff']} style={styles.container}>
         <MultiStep

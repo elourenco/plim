@@ -7,7 +7,6 @@ import styles from './sign-in-style';
 class SignInScreen extends Component {
   constructor(props) {
     super(props);
-    this.bootstrapAsync();
   }
 
   bootstrapAsync() {

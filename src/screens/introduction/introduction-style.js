@@ -9,7 +9,6 @@ export default StyleSheet.create({
   tools: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-end',
   }
 });

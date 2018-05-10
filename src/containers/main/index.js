@@ -33,7 +33,7 @@ const configTabNavigator = {
   lazy: true,
   tabBarOptions: {
     showIcon: true,
-    showLabel: true,
+    showLabel: true, 
     labelStyle: {
       fontSize: 9,
       shadowOffset: { width: 0, height: 0 },

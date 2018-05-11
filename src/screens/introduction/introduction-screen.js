@@ -25,10 +25,10 @@ class IntroductionScreen extends Component {
           <Text style={{color: '#fff', fontSize: 30}}>PLIMM</Text>
         </View>
         <View style={styles.tools}>
-        <Button style={{ margin: 10 }} full primary onPress={() => this.signInOnPress()} >
+        <Button style={{ margin: 10 }} block primary onPress={() => this.signInOnPress()} >
             <Text>Acessar</Text>
           </Button>
-          <Button style={{ margin: 10 }} full info onPress={() => this.signUpOnPress()} >
+          <Button style={{ margin: 10 }} block info onPress={() => this.signUpOnPress()} >
             <Text>Cadastrar</Text>
         </Button>
         </View>

@@ -85,6 +85,7 @@ class ProfileValidationScreen extends Component {
           <Input style={{ color: 'white' }}
             autoCapitalize="none"
             keyboardType="email-address"
+            autoCorrect={false}
             value={this.state.email}
             onChangeText={(text) => this.setState({ email: text })} />
         </Item>

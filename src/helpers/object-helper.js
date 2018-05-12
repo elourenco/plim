@@ -1,13 +1,8 @@
-const checkProperties = (obj) => {
-  let isEmpty = false
-  for (var key in obj) {
-    if (obj[key] !== null && obj[key] !== "") {
-      isEmpty = true;
-    }
-  }
-  return isEmpty;
+const hasIsNullOrEmpty = (obj) => {
+  let values = Object.values(obj);
+  return values.includes(null) || values.includes('');
 }
 
 export {
-  checkProperties
+  hasIsNullOrEmpty
 }

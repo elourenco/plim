@@ -5,7 +5,8 @@ const initialState = {
   error: null,
   email: null,
   cpf: null,
-  name: null
+  name: null,
+  address: null
 };
 
 export default (state = initialState, action) => {
@@ -15,11 +16,14 @@ export default (state = initialState, action) => {
         loading: false, 
         cpf: action.profile.cpf, 
         name: action.profile.name, 
-        email: action.profile.email
+        email: action.profile.email,
+        error: null
       };
     }
     case authUpActions.states.SIGN_UP_ADDRESS: {
       return { ...state,
+        loading: false,
+        error: null,
         address: action.address
       }
     }

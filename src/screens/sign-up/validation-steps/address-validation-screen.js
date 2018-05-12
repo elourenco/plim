@@ -26,17 +26,17 @@ class AddressValidationScreen extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.profile !== this.props.profile) {
       if (this.props.profile.address) {
-        const { bairro, cep, localidade, logradouro, uf } = this.props.profile
+        const { bairro, cep, localidade, logradouro, uf } = this.props.profile.address
         this.setState({ bairro, cep, localidade, logradouro, uf })
       }
     }
   }
 
   signUpAndNextPreprocess(address) {
-    const aa = hasIsNullOrEmpty(this.state);
-    console.log('state >>>', this.state);
-    // this.props.signUpUpdateProfileWithAddress(address)
-    // this.props.nextFn();
+    this.props.signUpUpdateProfileWithAddress(address)
+      .then(() => {
+        this.props.nextFn();
+      })
   }
 
   findAddressByCep(cep) {
@@ -115,10 +115,10 @@ class AddressValidationScreen extends Component {
           </Item>
         </FadeView>
         <Button style={{ marginTop: 50 }}
-          disabled={this.props.profile.address != null}
-          full
+          disabled={this.props.profile.address == null}
+          block
           onPress={() => this.signUpAndNextPreprocess(this.state)} >
-          <Text>Finalizar</Text>
+          {this.renderLoadingInButton()}
         </Button>
       </View>
     );

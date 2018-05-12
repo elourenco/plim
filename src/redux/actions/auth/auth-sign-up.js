@@ -33,15 +33,17 @@ const stateSignUpAddress = (address) => {
   }
 }
 
-const signUpUpdateProfileWithAddress = async (address) => {
-  try {
-    const userUID = await AsyncStorage.getItem('@user.uid');
-    const profile = await firebase.firestore
-      .collection('profiles')
-      .doc(userUID)
-      .set({ address }, {merge: true});
-  } catch (e) {
-    throw e;
+const signUpUpdateProfileWithAddress = (address) => {
+  return async (dispatch) => {
+    try {
+      const userUID = await AsyncStorage.getItem('@user.uid');
+      const addressUpdate = await firebase.firestore.collection('profiles')
+        .doc(userUID)
+        .set({ address }, { merge: true });
+        dispatch(stateSignUpAddress(address));
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
@@ -54,10 +56,10 @@ const signUpProfile = (profile) => {
       const profileDb = await firebase.firestore.collection('profiles').doc(user.uid).set({ cpf, name, email })
       if (user) {
         await AsyncStorage.setItem('@user.uid', user.uid);
-        dispatch(stateSignUpProfile({ cpf, name, email}));
+        dispatch(stateSignUpProfile({ cpf, name, email }));
       }
     }
-    catch(e) {
+    catch (e) {
       dispatch(stateSignFailed(e));
       throw e;
     }
@@ -67,7 +69,7 @@ const signUpProfile = (profile) => {
 const signUpAddressByCep = (cepStr) => {
   return dispatch => {
     try {
-      const viaCep = new ViaCep({type: 'json'});
+      const viaCep = new ViaCep({ type: 'json' });
       dispatch(stateSignUpValidate());
       const address = viaCep.zipCod.getZip(cepStr);
       address.then(data => data.json())
@@ -78,7 +80,7 @@ const signUpAddressByCep = (cepStr) => {
     } catch (e) {
       throw e;
     }
-    
+
   }
 }
 

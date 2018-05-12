@@ -60,7 +60,7 @@ class ProfileValidationScreen extends Component {
 
   render() {
     return (
-      <View style={{ margin: 10 }}>
+      <View style={{ flex: 1, margin: 10 }}>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >CPF</Label>
           <Input style={{ color: 'white' }}
@@ -104,7 +104,7 @@ class ProfileValidationScreen extends Component {
         </Item>
         <Button style={{ marginTop: 50 }}
           disabled={hasIsNullOrEmpty(this.state)}
-          full
+          block
           onPress={() => this.signUpAndNextPreprocess()} >
           {this.renderLoadingInButton()}
         </Button>

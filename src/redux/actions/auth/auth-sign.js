@@ -6,9 +6,16 @@ import typesAuthActions from './auth-types';
 import ViaCep from 'node-viacep';
 import firebase from '../../../config/firebase';
 
-const stateSignUpValidate = () => {
+const stateSignInProfile = (profile) => {
   return {
-    type: typesAuthActions.SIGN_UP_VALIDATE
+    type: typesAuthActions.SIGN_IN_PROFILE,
+    profile
+  };
+};
+
+const stateSignValidate = () => {
+  return {
+    type: typesAuthActions.SIGN_VALIDATE
   };
 };
 
@@ -51,7 +58,7 @@ const signUpProfile = (profile) => {
   return async (dispatch) => {
     try {
       const { cpf, name, email } = profile;
-      dispatch(stateSignUpValidate());
+      dispatch(stateSignValidate());
       const user = await firebase.auth.createUserWithEmailAndPassword(profile.email, profile.password)
       const profileDb = await firebase.firestore.collection('profiles').doc(user.uid).set({ cpf, name, email })
       if (user) {
@@ -70,7 +77,7 @@ const signUpAddressByCep = (cepStr) => {
   return dispatch => {
     try {
       const viaCep = new ViaCep({ type: 'json' });
-      dispatch(stateSignUpValidate());
+      dispatch(stateSignValidate());
       const address = viaCep.zipCod.getZip(cepStr);
       address.then(data => data.json())
         .then(res => {
@@ -84,7 +91,29 @@ const signUpAddressByCep = (cepStr) => {
   }
 }
 
+const signInProfile = (email, password) => {
+  return async (dispatch) => {
+    try {
+      dispatch(stateSignValidate());
+      const user = await firebase.auth.signInWithEmailAndPassword(email,password);
+      const docProfile = await firebase.firestore.collection('profiles').doc(user.uid)
+      const profile = await docProfile.get();
+      console.log('user:', user);
+      console.log('profile:', profile.data());
+      if (user && profile) {
+        await AsyncStorage.setItem('@user.uid', user.uid);
+        dispatch(stateSignInProfile(profile.data()));
+      }
+    }
+    catch (e) {
+      dispatch(stateSignFailed(e));
+      throw e;
+    }
+  };
+};
+
 export default {
+  signInProfile,
   signUpProfile,
   signUpAddressByCep,
   signUpUpdateProfileWithAddress

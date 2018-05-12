@@ -5,7 +5,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import { connect } from 'react-redux';
-import { authUpActions } from '../../../redux/actions';
+import { signActions } from '../../../redux/actions';
 import { hasIsNullOrEmpty } from '../../../helpers/object-helper';
 
 class ProfileValidationScreen extends Component {
@@ -120,7 +120,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authUpActions.actions, dispatch);
+  return bindActionCreators(signActions.actions, dispatch);
 }
 
 

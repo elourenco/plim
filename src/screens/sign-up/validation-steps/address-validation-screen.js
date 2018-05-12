@@ -5,7 +5,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { Button, Item, Input, Label, Text, Card, Body, CardItem } from 'native-base';
 import { connect } from 'react-redux';
-import { authUpActions } from '../../../redux/actions';
+import { signActions } from '../../../redux/actions';
 import { hasIsNullOrEmpty } from '../../../helpers/object-helper';
 import FadeView from '../../../components/fade-view';
 
@@ -132,7 +132,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(authUpActions.actions, dispatch);
+  return bindActionCreators(signActions.actions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressValidationScreen);

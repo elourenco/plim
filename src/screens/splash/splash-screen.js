@@ -10,9 +10,13 @@ class SplashScreen extends Component {
     this.bootstrapAsync();
   }
 
-  bootstrapAsync() {
-    // const userToken = await AsyncStorage.getItem('userToken');
-    this.props.navigation.navigate('AuthContainers');
+  async bootstrapAsync() {
+    const userUID = await AsyncStorage.getItem('@user.uid');
+    if (userUID) {
+      this.props.navigation.navigate('MainContainers');
+    } else {
+      this.props.navigation.navigate('AuthContainers');
+    }
   }
 
   render() {

@@ -16,7 +16,8 @@ export default StyleSheet.create({
   },
   textInput: {
     margin: 10,
-    fontSize: 20
+    fontSize: 20,
+    color: '#fff'
   },
   textInputContainer: {
     borderWidth: 1,
@@ -24,10 +25,5 @@ export default StyleSheet.create({
     borderRadius: 2,
     borderColor: '#ddd',
     backgroundColor: '#ffff'
-  },
-  icon: {
-    marginTop: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  }
 });

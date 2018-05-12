@@ -16,16 +16,7 @@ export default StackNavigator({
     },
     tabBarLabel: 'Comprar',
     tabBarIcon: ({ tintColor, active }) => (
-      <Icon
-        name="cart"
-        size={28}
-        color={tintColor}
-        style={{
-        shadowOffset: { width: 0, height: 0 },
-        shadowColor: '#0084ec',
-        shadowOpacity: 0.3,
-      }}
-      />
+      <Icon name="cart" size={28} color={tintColor} />
     ),
   }
 });

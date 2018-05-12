@@ -35,17 +35,14 @@ const configTabNavigator = {
     showIcon: true,
     showLabel: true, 
     labelStyle: {
-      fontSize: 9,
-      shadowOffset: { width: 0, height: 0 },
-      shadowColor: '#0084ec',
-      shadowOpacity: 0.3,
+      fontSize: 9
     },
     style: {
       backgroundColor: '#fff',
       borderTopWidth: 0,
       shadowOffset: { width: 0, height: 0 },
       shadowColor: '#0084ec',
-      shadowOpacity: 0.3
+      shadowOpacity: 0.4
     },
     pressOpacity: 2,
     animationEnabled: true

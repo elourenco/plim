@@ -4161,6 +4161,10 @@ node-fetch@^1.0.1, node-fetch@^1.3.3:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
+node-fetch@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
@@ -4207,6 +4211,12 @@ node-pre-gyp@^0.9.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+node-viacep@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/node-viacep/-/node-viacep-1.1.0.tgz#dcdaf6722804c45bfd25ca3377b38225ab3992d5"
+  dependencies:
+    node-fetch "^2.1.2"
 
 nopt@^4.0.1:
   version "4.0.1"

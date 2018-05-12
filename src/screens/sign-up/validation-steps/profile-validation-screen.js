@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { authUpActions } from '../../../redux/actions';
+import { checkProperties } from '../../../helpers/object-helper';
 
 class ProfileValidationScreen extends Component {
   constructor(props) {
@@ -19,19 +20,11 @@ class ProfileValidationScreen extends Component {
     }
   }
 
-  checkProperties(obj) {
-    for (var key in obj) {
-      if (obj[key] !== null && obj[key] !== "") {
-        return false;
-      }
-    }
-    return true;
-  }
-
   signUpAndNextPreprocess() {
-    if (!this.checkProperties(this.state)) {
+    if (checkProperties(this.state) && this.props.profile.error == null) {
       this.props.signUpProfile(this.state)
       .then(() => this.props.nextFn());
+
       // this.props.saveState(1, { key: '1' });
     } else {
       Alert.alert('Cadastro', 'Por favor, preencha todos os campos.',
@@ -61,9 +54,10 @@ class ProfileValidationScreen extends Component {
     if (error && !loading) {
       return <Text>{error}</Text>
     }
+
     return <Text />
   }
-  ;
+
   render() {
     return (
       <View style={{ margin: 10 }}>
@@ -71,8 +65,10 @@ class ProfileValidationScreen extends Component {
           <Label style={{ color: 'white' }} >CPF</Label>
           <Input style={{ color: 'white' }}
             keyboardType="numeric"
+            autoFocus={true}
             value={this.state.cpf}
-            onChangeText={(text) => this.setState({ cpf: text })} />
+            onChangeText={(text) => this.setState({ cpf: text })}
+            onEndEditing={(e) => console.log('>>>>>', e.nativeEvent.text) } />
         </Item>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >Nome completo</Label>
@@ -83,8 +79,8 @@ class ProfileValidationScreen extends Component {
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >E-mail</Label>
           <Input style={{ color: 'white' }}
-            autoCapitalize="none"
             keyboardType="email-address"
+            autoCapitalize='none'
             autoCorrect={false}
             value={this.state.email}
             onChangeText={(text) => this.setState({ email: text })} />
@@ -106,7 +102,7 @@ class ProfileValidationScreen extends Component {
             onChangeText={(text) => this.setState({ confPassword: text })} />
         </Item>
         <Button style={{ marginTop: 50 }}
-          disabled={this.checkProperties(this.state)}
+          disabled={!checkProperties(this.state)}
           full
           onPress={() => this.signUpAndNextPreprocess()} >
           {this.renderLoadingInButton()}

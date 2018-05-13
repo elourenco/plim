@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-
+import LinearGradient from 'react-native-linear-gradient';
+import lnBackgroundColor from '../../config/linear-gradient-colors';
 import styles from './splash-style';
 
 class SplashScreen extends Component {
@@ -21,9 +22,9 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
+      <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
+        <ActivityIndicator size="small" color="#fff" />
+      </LinearGradient>
     );
   }
 }

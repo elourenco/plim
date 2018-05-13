@@ -15,7 +15,8 @@ export default StackNavigator(
       headerTintColor: '#ffff',
       headerTitle: 'Minha Carteira',
       headerStyle: {
-        backgroundColor: '#15629b'
+        backgroundColor: '#0084ec',
+        borderBottomWidth: 0
       },
       tabBarLabel: 'Minha Carteira',
       tabBarIcon: ({ tintColor }) => (

@@ -14,7 +14,8 @@ export default StackNavigator(
       headerTintColor: '#ffff',
       headerTitle: 'Perfil',
       headerStyle: {
-        backgroundColor: '#15629b'
+        backgroundColor: '#0084ec',
+        borderBottomWidth: 0
       },
       tabBarLabel: 'Perfil',
       tabBarIcon: ({ tintColor }) => (

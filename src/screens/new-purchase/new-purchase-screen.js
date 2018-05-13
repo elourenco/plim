@@ -4,13 +4,14 @@ import { View } from 'react-native';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import lnBackgroundColor from '../../config/linear-gradient-colors';
 
 import styles from './new-purchase-style';
 
 class NewPurchaseScreen extends Component {
   render() {
     return (
-      <LinearGradient colors={['#0084ec', '#00b9fa', '#fff']} style={styles.container}>
+      <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
         <Icon
           name="cart-outline"
           size={100}

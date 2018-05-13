@@ -1,20 +1,20 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Template from '../../screens/template';
+import ListFundersScreen from '../../screens/list-funders/list-funders-screen';
 
 export default StackNavigator(
   {
-    Demo: { screen: Template }
+    ListFunders: { screen: ListFundersScreen }
   }, {
-    initialRouteName: 'Demo',
+    initialRouteName: 'ListFunders',
     navigationOptions: {
       gesturesEnabled: false,
       showLabel: false,
       headerTintColor: '#ffff',
-      headerTitle: 'Financiadoras',
       headerStyle: {
-        backgroundColor: '#15629b'
+        backgroundColor: '#0084ec',
+        borderBottomWidth: 0
       },
       tabBarLabel: 'Financiadoras',
       tabBarIcon: ({ tintColor }) => (

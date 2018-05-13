@@ -8,9 +8,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './new-purchase-style';
 
 class NewPurchaseScreen extends Component {
-  componentWillMount() {
-  }
-
   render() {
     return (
       <LinearGradient colors={['#0084ec', '#00b9fa', '#fff']} style={styles.container}>

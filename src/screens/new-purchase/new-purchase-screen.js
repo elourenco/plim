@@ -9,6 +9,10 @@ import lnBackgroundColor from '../../config/linear-gradient-colors';
 import styles from './new-purchase-style';
 
 class NewPurchaseScreen extends Component {
+  static navigationOptions = {
+    title: 'Nova Compra',
+  };
+
   render() {
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>

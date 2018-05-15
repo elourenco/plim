@@ -9,10 +9,9 @@ export default StackNavigator({
   initialRouteName: 'NewPurchase',
   navigationOptions: {
     headerTintColor: '#ffff',
-    headerTitle: 'Nova comprar',
     headerStyle: {
       backgroundColor: '#0084ec',
-      borderBottomWidth: 0
+      borderBottomWidth: 0,
     },
     tabBarLabel: 'Comprar',
     tabBarIcon: ({ tintColor, active }) => (

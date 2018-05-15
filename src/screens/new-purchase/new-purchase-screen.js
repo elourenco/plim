@@ -22,10 +22,7 @@ class NewPurchaseScreen extends Component {
           <Label style={{ color: 'white', textAlign: 'center' }} >DIGITA O CÓDIGO DA COMPRA</Label>
           <Input style={{ color: 'white', textAlign: 'center' }} />
         </Item>
-        <Button
-          style={{ margin: 50 }}
-          block
-        >
+        <Button style={{ margin: 50 }} block>
           <Text>COMPRAR</Text>
         </Button>
       </LinearGradient>

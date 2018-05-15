@@ -1,13 +1,13 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Template from '../../screens/template';
+import ProfileScreen from '../../screens/profile/profile-screen';
 
 export default StackNavigator(
   {
-    Demo: { screen: Template }
+    Profile: { screen: ProfileScreen }
   }, {
-    initialRouteName: 'Demo',
+    initialRouteName: 'Profile',
     navigationOptions: {
       gesturesEnabled: false,
       showLabel: false,

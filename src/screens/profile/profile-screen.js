@@ -30,11 +30,13 @@ class ProfileScreen extends Component {
       return (
         <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
           <View style={styles.card}>
+            <View style={styles.viewDisplay}>
             <Icon
               name="account-circle"
               size={80}
               color="#f1f1f1"
               style={styles.displayLogo} />
+            </View>
             <View style={styles.sectionInfo}>
               <Text style={{fontSize: 18, fontWeight: 'bold'}}>{name}</Text>
               <Text style={{fontSize: 14}}>{email}</Text>

@@ -41,7 +41,7 @@ class ProfileScreen extends Component {
               <Text style={{fontSize: 18, fontWeight: 'bold'}}>{name}</Text>
               <Text style={{fontSize: 14}}>{email}</Text>
             </View>
-            <Button block style={styles.logoffButton} 
+            <Button block warning style={styles.logoffButton} 
               onPress={() => this.signOutOnPress()} >
               <Text>Sair</Text>
             </Button>

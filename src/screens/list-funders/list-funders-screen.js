@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { View, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './list-funders-style';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
 import { purchaseActions } from '../../redux/actions';
+import LoadingView from '../../components/loading-view';
 
 class ListFundersScreen extends Component {
   static navigationOptions = {
@@ -15,37 +17,10 @@ class ListFundersScreen extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      data: [
-        {
-          id: "00",
-          name: "Renner",
-          activated: false,
-          credit: 2500,
-          dueDate: '05 de maio de 2018'
-        },
-        {
-          id: "02",
-          name: "Casas Bahia",
-          activated: false,
-          credit: 3000,
-          dueDate: '10 de maio de 2018'
-        },
-        {
-          id: "03",
-          name: "Submarino",
-          activated: false,
-          credit: 1000,
-          dueDate: '15 de maio de 2018'
-        }, {
-          id: "04",
-          name: "Magazine Luiza",
-          activated: false,
-          credit: 700,
-          dueDate: '20 de maio de 2018'
-        },
-      ]
-    };
+  }
+
+  componentWillMount() {
+    this.props.fundersByUser();
   }
 
   _selectedFunderOnPress(funder) {
@@ -53,6 +28,7 @@ class ListFundersScreen extends Component {
   }
 
   renderItem(item) {
+    console.log('>>', item);
     return (
       <TouchableOpacity onPress={() => this._selectedFunderOnPress(item)}>
         <View style={styles.item}>
@@ -82,15 +58,22 @@ class ListFundersScreen extends Component {
   }
 
   render() {
+    const { loading, funders, error } = this.props.purchase
+    if (loading) {
+      return <LoadingView />
+    } 
+    
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
         <FlatList
-          data={this.state.data}
+          data={funders}
           keyExtractor={item => item.id}
           renderItem={({ item }) => this.renderItem(item)}
         />
       </LinearGradient>
     );
+
+
   }
 }
 
@@ -105,4 +88,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(purchaseActions.actions, dispatch);
 }
 
-export default connect()(ListFundersScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ListFundersScreen);

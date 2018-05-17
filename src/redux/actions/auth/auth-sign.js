@@ -60,8 +60,7 @@ const signProfile = () => {
       dispatch(stateSignValidate());
       const userUID = await AsyncStorage.getItem('@user.uid');
       const profile = await firebase.firestore.collection('profiles').doc(userUID).get();
-      dispatch(stateSignProfile(profile.data())); 
-      
+      dispatch(stateSignProfile(profile.data()));
     }
     catch(e) {
       dispatch(stateSignFailed(e));

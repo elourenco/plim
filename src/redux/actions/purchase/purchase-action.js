@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import firebase from '../../../config/firebase';
 import typeActions from './purchase-type';
 
@@ -28,13 +29,18 @@ const stateFailed = (error) => {
   };
 }
 
-const fundersByUser = (user) => {
+const fundersByUser = () => {
   return async dispatch => {
     try {
       dispatch(stateValidate());
-      const listFunders = await firebase.firestore.collection('funders').doc(user).collection('approved').get();
-      dispatch(stateListFunders(listFunders.data()));
-    } catch(e) {
+      const userUID = await AsyncStorage.getItem('@user.uid');
+      let listFunders = await firebase.firestore.collection('funders')
+        .doc(userUID).collection('approved').get()
+      listFunders = listFunders.docs.map(d => d.data());
+      console.log('>>>>', listFunders)  
+      dispatch(stateListFunders(listFunders));
+        
+    } catch (e) {
       console.log(e);
       dispatch(stateFailed(e));
       throw e;

@@ -16,9 +16,8 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 5,
     shadowOffset: { width: 0, height: 0 },
-    shadowColor: '#0084ec',
-    shadowOpacity: 0.6,
-    shadowRadius: 5
+    shadowColor: '#000000',
+    shadowOpacity: 0.3,
   },
   itemLogo: {
     flex: 0.3,
@@ -31,5 +30,24 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     margin: 8
+  },
+  viewTextContainer: {
+    flex:1,
+    flexDirection: 'row',
+  },
+  nameText: {
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  labelText: {
+    flex: 0.4,
+    fontSize: 14,
+    color: 'gray',
+    textAlign: 'left'
+  },
+  valueText: {
+    flex: 0.6,
+    fontSize: 14,
+    textAlign: 'right'
   }
 });

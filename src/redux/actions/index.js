@@ -1,13 +1,13 @@
-import fetchApplicationAction from './application/application-fetch';
-import fetchApplicationTypes from './application/application-types';
+import actionApplicationAction from './application/application-action';
+import actionApplicationTypes from './application/application-types';
 import signAction from './auth/auth-sign';
 import authType from './auth/auth-types';
 
 
 const applicationActions = {
-  fetch: fetchApplicationAction,
+  fetch: actionApplicationAction,
   states: {
-    ...fetchApplicationTypes
+    ...actionApplicationTypes
   }
 };
 

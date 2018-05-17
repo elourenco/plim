@@ -1,7 +1,6 @@
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import PurchaseTabStackNavigation from './purchase-tabstacknavigator';
-import FundersTabStackNavigation from './funders-tabstacknavigator';
 import WalletTabStackNavigation from './wallet-tabstacknavigator';
 import PaymentsTabStackNavigation from './payments-tabstacknavgator';
 import ProfileTabStackNavigation from './profile-tabstacknavigator';
@@ -9,9 +8,6 @@ import ProfileTabStackNavigation from './profile-tabstacknavigator';
 const routerTabNavigator = {
   PurchaseTab: {
     screen: PurchaseTabStackNavigation
-  },
-  FundersTab: {
-    screen: FundersTabStackNavigation
   },
   WalletTab: {
     screen: WalletTabStackNavigation

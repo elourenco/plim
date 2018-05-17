@@ -37,7 +37,6 @@ const fundersByUser = () => {
       let listFunders = await firebase.firestore.collection('funders')
         .doc(userUID).collection('approved').get()
       listFunders = listFunders.docs.map(d => d.data());
-      console.log('>>>>', listFunders)  
       dispatch(stateListFunders(listFunders));
         
     } catch (e) {

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { View, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './list-funders-style';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
@@ -49,7 +50,7 @@ class ListFundersScreen extends Component {
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Vencimento: </Text>
-              <Text style={styles.valueText}>{item.dueDate}</Text>
+              <Text style={styles.valueText}>{moment.unix(item.dueDate.seconds).format('DD MMMM YYYY')}</Text>
             </View>
           </View>
         </View>

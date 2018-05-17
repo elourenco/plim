@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './list-funders-style';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
+import { purchaseActions } from '../../redux/actions';
 
 class ListFundersScreen extends Component {
   static navigationOptions = {
@@ -91,6 +92,17 @@ class ListFundersScreen extends Component {
       </LinearGradient>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    profile: state.profile,
+    purchase: state.purchase
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(purchaseActions.actions, dispatch);
 }
 
 export default connect()(ListFundersScreen);

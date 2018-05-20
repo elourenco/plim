@@ -48,8 +48,8 @@ const fundersByUser = () => {
 }
 
 const selectFunder = (funder) => {
-  return dispatch => {
-    dispatch(stateSelectedFunder(funder));
+  return async dispatch => {
+    await dispatch(stateSelectedFunder(funder));
   }
 }
 

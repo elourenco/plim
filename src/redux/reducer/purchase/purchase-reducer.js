@@ -4,7 +4,8 @@ const initialState = {
   loading: false,
   error: null,
   funders: [],
-  funderSelected: null
+  funderSelected: null,
+  purchase: null
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +15,24 @@ export default (state = initialState, action) => {
         loading: true,
         error: null,
         funders: [],
-        funderSelected: null
+        funderSelected: null,
+        purchase: null
+      }
+    }
+    case purchaseActions.states.PRUCHASE_CODE_INVALID: {
+      return { ...state,
+        loading: false,
+        error: 'Code invalid',
+        funders: [],
+        funderSelected: null,
+        purchase: null
+      }
+    }
+    case purchaseActions.states.PURCHASE_CODE_VALIDATED: {
+      return { ...state,
+        loading: false,
+        error: null,
+        purchase: action.purchase
       }
     }
     case purchaseActions.states.PURCHASE_LIST_FUNDERS: {
@@ -37,7 +55,8 @@ export default (state = initialState, action) => {
         loading: false,
         error: action.error,
         funders: [],
-        funderSelected: null
+        funderSelected: null,
+        purchase: null
       };
     }
     default:

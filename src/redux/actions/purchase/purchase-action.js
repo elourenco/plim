@@ -8,6 +8,19 @@ const stateValidate = () => {
   };
 }
 
+const statePurchaseCodeValidated = (purchase) => {
+  return {
+    type: typeActions.PURCHASE_CODE_VALIDATED,
+    purchase
+  }
+}
+
+const statePurchaseCodeInvalid = () => {
+  return {
+    type: typeActions.PRUCHASE_CODE_INVALID,
+  }
+}
+
 const stateListFunders = (funders) => {
   return {
     type: typeActions.PURCHASE_LIST_FUNDERS,
@@ -29,6 +42,7 @@ const stateFailed = (error) => {
   };
 }
 
+// ################################################################################
 const fundersByUser = () => {
   return async dispatch => {
     try {
@@ -53,7 +67,28 @@ const selectFunder = (funder) => {
   }
 }
 
+const validatePurchase = (code) => {
+  return async dispatch => {
+    try {
+      dispatch(stateValidate());
+      const userUID = await AsyncStorage.getItem('@user.uid');
+      const purchase = await firebase.firestore.collection('purchases')
+        .doc(userUID).collection(code).get();
+        if(!purchase.empty){
+          const purchaseFirst = purchase.docs.map(d => d.data())[0];
+          dispatch(statePurchaseCodeValidated(purchaseFirst))
+        } else {
+          dispatch(statePurchaseCodeInvalid())
+        }
+    } catch(e) {
+      dispatch(stateFailed(e));
+      throw e
+    }
+  }
+}
+
 export default {
   fundersByUser,
-  selectFunder
+  selectFunder,
+  validatePurchase
 };

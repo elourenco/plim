@@ -14,8 +14,6 @@ export default (state = initialState, action) => {
       return { ...state,
         loading: true,
         error: null,
-        funders: [],
-        funderSelected: null,
         purchase: null
       }
     }
@@ -23,8 +21,6 @@ export default (state = initialState, action) => {
       return { ...state,
         loading: false,
         error: 'Code invalid',
-        funders: [],
-        funderSelected: null,
         purchase: null
       }
     }

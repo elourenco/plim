@@ -76,9 +76,10 @@ const validatePurchase = (code) => {
         .doc(userUID).collection(code).get();
         if(!purchase.empty){
           const purchaseFirst = purchase.docs.map(d => d.data())[0];
-          dispatch(statePurchaseCodeValidated(purchaseFirst))
+          dispatch(statePurchaseCodeValidated(purchaseFirst));
         } else {
-          dispatch(statePurchaseCodeInvalid())
+          dispatch(statePurchaseCodeInvalid());
+          throw {}
         }
     } catch(e) {
       dispatch(stateFailed(e));

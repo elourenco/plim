@@ -26,7 +26,7 @@ class ListFundersScreen extends Component {
 
   _selectedFunderOnPress(funder) {
     this.props.selectFunder(funder)
-      .then(() => this.props.navigation.navigate('NewPurchase', funder));
+      .then(() => this.props.navigation.push('NewPurchase', funder));
   }
 
   renderItem(item) {

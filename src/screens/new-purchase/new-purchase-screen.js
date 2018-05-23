@@ -31,6 +31,7 @@ class NewPurchaseScreen extends Component {
     this.props.validatePurchase(this.state.codePurchase)
       .then(() => {
         console.log('Codigo valido');
+        this.props.navigation.push('PurchaseOrder');
       })
       .catch(e => {
         console.log(e);
@@ -41,7 +42,7 @@ class NewPurchaseScreen extends Component {
   render() {
     const { error } = this.props.purchase;
     const itemError = error ? true : false
-    
+
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
         <IconLogo
@@ -54,13 +55,13 @@ class NewPurchaseScreen extends Component {
           error={itemError}>
           <Label style={{ color: 'white', textAlign: 'center' }} >DIGITA O CÓDIGO DA COMPRA</Label>
           <Input style={{ color: 'white', textAlign: 'center' }}
-          autoFocus={true}
-          maxLength={18}
-          value={this.state.codePurchase.toUpperCase()}
-          onChangeText={(text) => this.setState({ codePurchase: text.toUpperCase() })}
+            autoFocus={true}
+            maxLength={18}
+            value={this.state.codePurchase.toUpperCase()}
+            onChangeText={(text) => this.setState({ codePurchase: text.toUpperCase() })}
           />
         </Item>
-        <Button style={{ margin: 50 }} 
+        <Button style={{ margin: 50 }}
           block
           disabled={hasIsNullOrEmpty(this.state)}
           onPress={() => this.validatePurchase()}>

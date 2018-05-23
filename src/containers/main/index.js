@@ -31,7 +31,7 @@ const configTabNavigator = {
     showIcon: true,
     showLabel: true, 
     labelStyle: {
-      fontSize: 9
+      fontSize: 10
     },
     style: {
       backgroundColor: '#fff',

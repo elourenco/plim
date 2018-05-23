@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Template from '../../screens/template';
 
 export default StackNavigator(
@@ -20,7 +20,7 @@ export default StackNavigator(
       },
       tabBarLabel: 'Minha Carteira',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="wallet" size={28} color={tintColor} />
+        <Icon name="wallet" size={20} color={tintColor} />
       ),
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/EvilIcons';
 import ProfileScreen from '../../screens/profile/profile-screen';
 
 export default StackNavigator(
@@ -19,7 +19,7 @@ export default StackNavigator(
       },
       tabBarLabel: 'Perfil',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="account" size={28} color={tintColor} />
+        <Icon name="user" size={28} color={tintColor} />
       ),
     }
   }

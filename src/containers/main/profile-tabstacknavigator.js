@@ -14,6 +14,7 @@ export default StackNavigator(
       headerTintColor: '#ffff',
       headerTitle: 'Perfil',
       headerStyle: {
+        elevation: 0,
         backgroundColor: '#0084ec',
         borderBottomWidth: 0
       },

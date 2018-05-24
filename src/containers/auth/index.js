@@ -15,6 +15,7 @@ export default StackNavigator(
       showLabel: false,
       headerTintColor: '#ffff',
       headerStyle: {
+        elevation: 0,
         backgroundColor: '#0084ec',
         borderBottomWidth: 0
       }

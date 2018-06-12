@@ -5,15 +5,23 @@ import { View, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-nat
 import { Button, Item, Input, Label, Text } from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Entypo';
 import styles from './list-funders-style';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
 import { purchaseActions } from '../../redux/actions';
 import LoadingView from '../../components/loading-view';
 
 class ListFundersScreen extends Component {
-  static navigationOptions = {
-    title: 'Seleciona financiadora',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Seleciona financiadora',
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.push('ApplyFunder')}>
+        <Icon style={{ marginRight: 8 }} name="add-to-list" size={24} color='#fff' />
+        </TouchableOpacity>
+      ),
+    }
   };
 
   constructor(props, context) {

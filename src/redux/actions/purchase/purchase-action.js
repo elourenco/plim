@@ -48,11 +48,32 @@ const fundersByUser = () => {
     try {
       dispatch(stateValidate());
       const userUID = await AsyncStorage.getItem('@user.uid');
+      let profiles = await firebase.firestore.collection('profiles').doc(userUID).get()
+      listFunders = profiles.data().funders;
+      listFunders = listFunders.map(lf => {
+        console.log(lf.funderRef.document())
+      })
+
+      dispatch(stateListFunders(listFunders));
+
+    } catch (e) {
+      console.log(e);
+      dispatch(stateFailed(e));
+      throw e;
+    }
+  }
+}
+
+const listFunders = () => {
+  return async dispatch => {
+    try {
+      dispatch(stateValidate());
+      const userUID = await AsyncStorage.getItem('@user.uid');
       let listFunders = await firebase.firestore.collection('funders')
         .doc(userUID).collection('approved').get()
       listFunders = listFunders.docs.map(d => d.data());
       dispatch(stateListFunders(listFunders));
-        
+
     } catch (e) {
       console.log(e);
       dispatch(stateFailed(e));
@@ -74,14 +95,14 @@ const validatePurchase = (code) => {
       const userUID = await AsyncStorage.getItem('@user.uid');
       const purchase = await firebase.firestore.collection('purchases')
         .doc(userUID).collection(code).get();
-        if(!purchase.empty){
-          const purchaseFirst = purchase.docs.map(d => d.data())[0];
-          dispatch(statePurchaseCodeValidated(purchaseFirst));
-        } else {
-          dispatch(statePurchaseCodeInvalid());
-          throw {}
-        }
-    } catch(e) {
+      if (!purchase.empty) {
+        const purchaseFirst = purchase.docs.map(d => d.data())[0];
+        dispatch(statePurchaseCodeValidated(purchaseFirst));
+      } else {
+        dispatch(statePurchaseCodeInvalid());
+        throw {}
+      }
+    } catch (e) {
       dispatch(stateFailed(e));
       throw e
     }

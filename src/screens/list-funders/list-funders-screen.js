@@ -47,7 +47,7 @@ class ListFundersScreen extends Component {
           </View>
           <View style={styles.itemDetails}>
             <View style={styles.viewTextContainer}>
-              <Text style={styles.nameText}>{item.name}</Text>
+              <Text style={styles.nameText}>{item.funder.name}</Text>
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Credito: </Text>
@@ -57,10 +57,6 @@ class ListFundersScreen extends Component {
               <Text style={styles.labelText}>Saldo: </Text>
               <Text style={styles.valueText}>R$ {item.credit}</Text>
             </View>
-            <View style={styles.viewTextContainer}>
-              <Text style={styles.labelText}>Vencimento: </Text>
-              <Text style={styles.valueText}>{moment.unix(item.dueDate.seconds).format('DD MMMM YYYY')}</Text>
-            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -68,7 +64,7 @@ class ListFundersScreen extends Component {
   }
 
   render() {
-    const { loading, funders, error } = this.props.purchase
+    const { loading, fundersByUser, error } = this.props.purchase
     if (loading) {
       return <LoadingView />
     } 
@@ -76,7 +72,7 @@ class ListFundersScreen extends Component {
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
         <FlatList
-          data={funders}
+          data={ fundersByUser }
           keyExtractor={item => item.id}
           renderItem={({ item }) => this.renderItem(item)}
         />

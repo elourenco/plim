@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   error: null,
   funders: [],
+  fundersByUser: [],
   funderSelected: null,
   purchase: null
 };
@@ -36,6 +37,14 @@ export default (state = initialState, action) => {
         loading: false,
         error: null,
         funders: action.funders,
+        funderSelected: null
+      };
+    }
+    case purchaseActions.states.PURCHASE_FUNDERS_BY_USER: {
+      return { ...state,
+        loading: false,
+        error: null,
+        fundersByUser: action.fundersByUser,
         funderSelected: null
       };
     }

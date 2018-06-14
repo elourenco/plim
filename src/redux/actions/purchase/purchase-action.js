@@ -28,6 +28,13 @@ const stateListFunders = (funders) => {
   };
 }
 
+const stateFundersByUser = (fundersByUser) => {
+  return {
+    type: typeActions.PURCHASE_FUNDERS_BY_USER,
+    fundersByUser
+  };
+}
+
 const stateSelectedFunder = (funder) => {
   return {
     type: typeActions.PURCHASE_SELECTED_FUNDER,
@@ -48,13 +55,24 @@ const fundersByUser = () => {
     try {
       dispatch(stateValidate());
       const userUID = await AsyncStorage.getItem('@user.uid');
-      let profiles = await firebase.firestore.collection('profiles').doc(userUID).get()
+      const profiles = await firebase.firestore.collection('profiles').doc(userUID).get()
+      const FundersRefsPromises = []
+
       listFunders = profiles.data().funders;
-      listFunders = listFunders.map(lf => {
-        console.log(lf.funderRef.document())
+      
+      listFunders.forEach(lf => {
+        FundersRefsPromises.push(lf.funderRef.get());
       })
 
-      dispatch(stateListFunders(listFunders));
+      Promise.all(FundersRefsPromises)
+        .then(fds => {
+          fds.forEach((f, index) => {
+            listFunders[index].funder = f.data();
+          })
+          
+          dispatch(stateFundersByUser(listFunders));
+      })
+      
 
     } catch (e) {
       console.log(e);
@@ -68,9 +86,7 @@ const listFunders = () => {
   return async dispatch => {
     try {
       dispatch(stateValidate());
-      const userUID = await AsyncStorage.getItem('@user.uid');
-      let listFunders = await firebase.firestore.collection('funders')
-        .doc(userUID).collection('approved').get()
+      let listFunders = await firebase.firestore.collection('funders').get()
       listFunders = listFunders.docs.map(d => d.data());
       dispatch(stateListFunders(listFunders));
 
@@ -112,5 +128,6 @@ const validatePurchase = (code) => {
 export default {
   fundersByUser,
   selectFunder,
-  validatePurchase
+  validatePurchase,
+  listFunders
 };

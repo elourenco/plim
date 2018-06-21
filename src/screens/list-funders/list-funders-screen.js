@@ -38,8 +38,11 @@ class ListFundersScreen extends Component {
   }
 
   renderItem(item) {
+    const disabledItem = item.status === 'await'
     return (
-      <TouchableOpacity onPress={() => this._selectedFunderOnPress(item)}>
+      <TouchableOpacity style={{opacity: disabledItem ? 0.3: 1}} 
+        disabled={disabledItem} 
+        onPress={() => this._selectedFunderOnPress(item)}>
         <View style={styles.item}>
           <View style={styles.itemLogo}>
             <Icon name="credit-card" size={40} color='#DCDCDC' />

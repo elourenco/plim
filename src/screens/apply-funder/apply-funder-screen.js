@@ -28,13 +28,27 @@ class ApplyFunderScreen extends Component {
     this.props.listFunders();
   }
 
-  _selectedFunderOnPress(funder) {
-    this.props.selectFunder(funder)
-      .then(() => this.props.navigation.push('NewPurchase', funder));
+  _applyFunderOnPress(item) {
+    const funder = {
+      balance: 3000,
+      credit: 3000,
+      status: 'await',
+      name: item.name
+    }
+
+    this.props.applyFundersByUser(funder);
+  }
+
+  renderLoadingInButton() {
+    const { loading } = this.props.purchase;
+    if (loading) {
+      return <ActivityIndicator size="small" color="#fff" />
+    }
+
+    return <Text>Solicitar</Text>
   }
 
   renderItem(item) {
-    console.log('>>', item);
     return (
       <View style={styles.item}>
         <View style={styles.itemLogo}>
@@ -58,7 +72,9 @@ class ApplyFunderScreen extends Component {
             />
           </View>
           <View style={styles.viewActionContainer}>
-            <Button primary small block><Text> Solicitar </Text></Button>
+            <Button primary small block onPress={() => { this._applyFunderOnPress(item); }}>
+              {this.renderLoadingInButton()}
+            </Button>
           </View>
         </View>
       </View>
@@ -68,9 +84,6 @@ class ApplyFunderScreen extends Component {
 
   render() {
     const { loading, funders, error } = this.props.purchase
-    if (loading) {
-      return <LoadingView />
-    }
 
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>

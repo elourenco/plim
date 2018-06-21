@@ -49,7 +49,38 @@ const stateFailed = (error) => {
   };
 }
 
+const stateApplyFunder = () => {
+  return {
+    type: typeActions.PURCHASE_APPLY_FUNDER
+  };
+}
+
 // ################################################################################
+
+const applyFundersByUser = (funder) => {
+  return async dispatch => {
+    try {
+      dispatch(stateValidate());
+      const userUID = await AsyncStorage.getItem('@user.uid');
+      const profiles = await firebase.firestore.collection('profiles').doc(userUID).get();
+      const profilesUpdate = await firebase.firestore.collection('profiles').doc(userUID);
+
+      let listFunders = profiles.data().funders;
+      listFunders.push(funder);
+
+      profilesUpdate.set({ funders: listFunders }, { merge: true });
+
+      dispatch(stateApplyFunder());
+      
+    } catch (e) {
+      console.log(e);
+      dispatch(stateFailed(e));
+      throw e;
+    }
+  }
+}
+
+
 const fundersByUser = () => {
   return async dispatch => {
     try {
@@ -57,23 +88,10 @@ const fundersByUser = () => {
       const userUID = await AsyncStorage.getItem('@user.uid');
       const profiles = await firebase.firestore.collection('profiles').doc(userUID).get()
       const FundersRefsPromises = []
-
       listFunders = profiles.data().funders;
-      
-      listFunders.forEach(lf => {
-        FundersRefsPromises.push(lf.funderRef.get());
-      })
 
-      Promise.all(FundersRefsPromises)
-        .then(fds => {
-          fds.forEach((f, index) => {
-            listFunders[index].funder = f.data();
-          })
-          
-          dispatch(stateFundersByUser(listFunders));
-      })
-      
-
+      dispatch(stateFundersByUser(listFunders));
+  
     } catch (e) {
       console.log(e);
       dispatch(stateFailed(e));
@@ -129,5 +147,6 @@ export default {
   fundersByUser,
   selectFunder,
   validatePurchase,
-  listFunders
+  listFunders,
+  applyFundersByUser
 };

@@ -38,7 +38,6 @@ class ListFundersScreen extends Component {
   }
 
   renderItem(item) {
-    console.log('>>', item);
     return (
       <TouchableOpacity onPress={() => this._selectedFunderOnPress(item)}>
         <View style={styles.item}>
@@ -47,7 +46,7 @@ class ListFundersScreen extends Component {
           </View>
           <View style={styles.itemDetails}>
             <View style={styles.viewTextContainer}>
-              <Text style={styles.nameText}>{item.funder.name}</Text>
+              <Text style={styles.nameText}>{item.name}</Text>
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Credito: </Text>
@@ -55,7 +54,7 @@ class ListFundersScreen extends Component {
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Saldo: </Text>
-              <Text style={styles.valueText}>R$ {item.credit}</Text>
+              <Text style={styles.valueText}>R$ {item.balance}</Text>
             </View>
           </View>
         </View>

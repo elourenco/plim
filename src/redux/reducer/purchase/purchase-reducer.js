@@ -55,6 +55,12 @@ export default (state = initialState, action) => {
         funderSelected: action.funder
       };
     }
+    case purchaseActions.states.PURCHASE_APPLY_FUNDER: {
+      return { ...state,
+        loading: false,
+        error: null
+      };
+    }
     case purchaseActions.states.PURCHASE_FAILED: {
       return { ...state,
         loading: false,

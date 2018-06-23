@@ -10,7 +10,8 @@ const routeConfigs = {
 };
 
 const navigatorConfig = {
-  initialRouteName: 'SplashScreen'
+  initialRouteName: 'SplashScreen',
+  headerMode: 'none',
 };
 
 export default SwitchNavigator(routeConfigs, navigatorConfig);

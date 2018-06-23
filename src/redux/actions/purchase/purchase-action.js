@@ -68,10 +68,10 @@ const applyFundersByUser = (funder) => {
       let listFunders = profiles.data().funders;
       listFunders.push(funder);
 
-      profilesUpdate.set({ funders: listFunders }, { merge: true });
+      await profilesUpdate.set({ funders: listFunders }, { merge: true });
 
       dispatch(stateApplyFunder());
-      
+
     } catch (e) {
       console.log(e);
       dispatch(stateFailed(e));
@@ -79,7 +79,6 @@ const applyFundersByUser = (funder) => {
     }
   }
 }
-
 
 const fundersByUser = () => {
   return async dispatch => {
@@ -91,7 +90,7 @@ const fundersByUser = () => {
       listFunders = profiles.data().funders;
 
       dispatch(stateFundersByUser(listFunders));
-  
+
     } catch (e) {
       console.log(e);
       dispatch(stateFailed(e));
@@ -122,16 +121,15 @@ const selectFunder = (funder) => {
   }
 }
 
-const validatePurchase = (code) => {
+const searchCodePurchase = (code) => {
   return async dispatch => {
     try {
       dispatch(stateValidate());
-      const userUID = await AsyncStorage.getItem('@user.uid');
       const purchase = await firebase.firestore.collection('purchases')
-        .doc(userUID).collection(code).get();
-      if (!purchase.empty) {
-        const purchaseFirst = purchase.docs.map(d => d.data())[0];
-        dispatch(statePurchaseCodeValidated(purchaseFirst));
+        .doc(code).get();
+
+      if (purchase.exists) {
+        dispatch(statePurchaseCodeValidated(purchase.data()));
       } else {
         dispatch(statePurchaseCodeInvalid());
         throw {}
@@ -143,10 +141,17 @@ const validatePurchase = (code) => {
   }
 }
 
+const makePurchases = () => {
+  return async dispatch => {
+
+  }
+}
+
 export default {
   fundersByUser,
   selectFunder,
-  validatePurchase,
+  searchCodePurchase,
   listFunders,
-  applyFundersByUser
+  applyFundersByUser,
+  makePurchases
 };

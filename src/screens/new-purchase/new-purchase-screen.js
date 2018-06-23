@@ -26,9 +26,9 @@ class NewPurchaseScreen extends Component {
     };
   };
 
-  validatePurchase() {
-    console.log('ValidatePurchase: ', this.state.codePurchase);
-    this.props.validatePurchase(this.state.codePurchase)
+  searchCodePurchase() {
+    console.log('searchCodePurchase: ', this.state.codePurchase);
+    this.props.searchCodePurchase(this.state.codePurchase)
       .then(() => {
         console.log('Codigo valido');
         this.props.navigation.push('PurchaseOrder');
@@ -64,7 +64,7 @@ class NewPurchaseScreen extends Component {
         <Button style={{ margin: 50 }}
           block
           disabled={hasIsNullOrEmpty(this.state)}
-          onPress={() => this.validatePurchase()}>
+          onPress={() => this.searchCodePurchase()}>
           <Text>COMPRAR</Text>
         </Button>
       </LinearGradient>

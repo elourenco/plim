@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, FlatList, Image, TouchableOpacity, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Button, Item, Input, Label, Text } from 'native-base';
 import Slider from "react-native-slider";
 import LinearGradient from 'react-native-linear-gradient';
@@ -36,7 +36,10 @@ class ApplyFunderScreen extends Component {
       name: item.name
     }
 
-    this.props.applyFundersByUser(funder);
+    this.props.applyFundersByUser(funder)
+      .then(() => {
+        this.props.navigation.goBack();
+      });
   }
 
   renderLoadingInButton() {

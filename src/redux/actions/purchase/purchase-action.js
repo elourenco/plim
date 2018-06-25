@@ -55,6 +55,11 @@ const stateApplyFunder = () => {
   };
 }
 
+const stateMakePurchase = () => {
+  return {
+    type: typeActions.PURCHASE_MAKE_PURCHASE
+  }
+}
 // ################################################################################
 
 const applyFundersByUser = (funder) => {
@@ -141,9 +146,42 @@ const searchCodePurchase = (code) => {
   }
 }
 
-const makePurchases = () => {
-  return async dispatch => {
+const updateBalanceByUser = async (purchase, funder) => {
+  const userUID = await AsyncStorage.getItem('@user.uid');
+  const profiles = await firebase.firestore.collection('profiles').doc(userUID).get();
+  const profilesUpdate = await firebase.firestore.collection('profiles').doc(userUID);
+  
+  const listFunders = profiles.data().funders.map(f => {
+    if(f.name === funder.name) {
+      f.balance = funder.balance - (purchase.numberOfLoop > 0 ? (purchase.price / purchase.numberOfLoop) : purchase.price);
+    }
+  });
 
+  profilesUpdate.set({ funders: listFunders }, { merge: true });
+
+}
+
+const deletePurchaseApproved = async (code) => {
+  await firebase.firestore.collection('purchases').doc(code).delete();
+}
+
+const makePurchases = (code, purchase, funder) => {
+  return async dispatch => {
+    const userUID = await AsyncStorage.getItem('@user.uid');
+    const profiles = await firebase.firestore.collection('profiles').doc(userUID).get();
+    const profilesUpdate = await firebase.firestore.collection('profiles').doc(userUID);
+    const listPurchase = profiles.data().purchases;
+    
+    purchase.status = 'approved';
+
+    listPurchase.push(purchase);
+    profilesUpdate.set({ purchases: listPurchase }, { merge: true });
+
+    // updateBalanceByUser(purchase, funder);
+
+    // deletePurchaseApproved(code);
+
+    dispatch(stateMakePurchase());
   }
 }
 

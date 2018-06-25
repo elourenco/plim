@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Keyboard, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { purchaseActions } from '../../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Button, Text, Item, Label, Input } from 'native-base';
 import LoadingView from '../../components/loading-view';
@@ -18,22 +19,26 @@ class SecretCodeScreen extends Component {
     };
   };
 
-  confirm() {
+  confirm(code, purchase, funder) {
     if(this.state.secretCode === '00000000') {
-      Alert.alert(
-        'Compra',
-        'Compra Realizada com sucesso.',
-        [
-          {text: 'OK', onPress: () => {
-            this.props.navigation.navigate('MainContainers');
-          }},
-        ],
+      this.props.makePurchases(code, purchase, funder).then(() => {
+        Alert.alert('Compra', 'Compra Realizado com sucesso',
+        [{text: 'OK', onPress: () => this.props.navigation.navigate('PurchaseTab')}],
         { cancelable: false }
-      )
+      );
+      })
+    } else {
+      Alert.alert('Código Secreto', 'Código inválido',
+        [{text: 'OK'}],
+        { cancelable: false }
+      );
     }
   }
 
   render() {
+    const { params } = this.props.navigation.state;
+    const funder = this.props.funder;
+
     return (
       <LinearGradient colors={lnBackgroundColor.backgroundColor} style={styles.container}>
         <View style={styles.content}>
@@ -63,7 +68,7 @@ class SecretCodeScreen extends Component {
           <Button style={{ margin: 15 }}
             block
             Success
-            onPress={() => this.confirm()}>
+            onPress={() => this.confirm(params.codePurchase, params.purchase, funder)}>
             <Text>CONFIRMAR</Text>
           </Button>
         </View>
@@ -74,9 +79,13 @@ class SecretCodeScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.profile
+    profile: state.profile,
+    funder: state.purchase.funderSelected
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(purchaseActions.actions, dispatch);
+}
 
-export default connect(mapStateToProps)(SecretCodeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SecretCodeScreen);

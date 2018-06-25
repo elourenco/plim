@@ -27,11 +27,11 @@ class NewPurchaseScreen extends Component {
   };
 
   searchCodePurchase() {
-    console.log('searchCodePurchase: ', this.state.codePurchase);
+
     this.props.searchCodePurchase(this.state.codePurchase)
       .then(() => {
         console.log('Codigo valido');
-        this.props.navigation.push('PurchaseOrder');
+        this.props.navigation.push('PurchaseOrder', this.state );
       })
       .catch(e => {
         console.log(e);

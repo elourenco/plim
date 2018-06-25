@@ -14,7 +14,9 @@ import styles from './purchase-order-style';
 class PurchaseOrder extends Component {
 
   confirmPurchase() {
-    this.props.navigation.navigate('SecretCodeScreen');
+    const { params } = this.props.navigation.state;
+    const { purchase } = this.props.purchase
+    this.props.navigation.navigate('SecretCodeScreen', { purchase, codePurchase: params.codePurchase });
   }
 
   render() {

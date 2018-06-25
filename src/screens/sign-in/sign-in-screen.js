@@ -32,6 +32,9 @@ class SignInScreen extends Component {
       })
       .catch(e => {
         console.log(e);
+        this.setState({password: ''}, () => {
+          alert('E-mail ou senha invalida');
+        })
       })
   };
 

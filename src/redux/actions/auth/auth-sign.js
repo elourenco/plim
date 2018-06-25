@@ -19,6 +19,19 @@ const stateSignValidate = () => {
   };
 };
 
+const stateSignOutProfile = () => {
+  return {
+    type: typesAuthActions.SIGN_OUT_USER
+  }
+}
+
+const stateSignProfile = (profile) => {
+  return {
+    type: typesAuthActions.SIGN_PROFILE,
+    profile
+  }
+}
+
 const stateSignUpProfile = (profile) => {
   return {
     type: typesAuthActions.SIGN_UP_PROFILE,
@@ -40,6 +53,37 @@ const stateSignUpAddress = (address) => {
   }
 }
 
+
+const signProfile = () => {
+  return async dispatch => {
+    try {
+      dispatch(stateSignValidate());
+      const userUID = await AsyncStorage.getItem('@user.uid');
+      const profile = await firebase.firestore.collection('profiles').doc(userUID).get();
+      dispatch(stateSignProfile(profile.data()));
+    }
+    catch(e) {
+      dispatch(stateSignFailed(e));
+      throw e;
+    }
+  }
+}
+
+const signOutProfile = () => {
+  return async dispatch => {
+    try {
+      dispatch(stateSignValidate());
+      await firebase.auth.signOut();
+      await AsyncStorage.removeItem('@user.uid');
+      dispatch(stateSignOutProfile());
+    }
+    catch (e) {
+      dispatch(stateSignFailed(e));
+      throw e;
+    }
+  }
+}
+
 const signUpUpdateProfileWithAddress = (address) => {
   return async (dispatch) => {
     try {
@@ -47,7 +91,7 @@ const signUpUpdateProfileWithAddress = (address) => {
       const addressUpdate = await firebase.firestore.collection('profiles')
         .doc(userUID)
         .set({ address }, { merge: true });
-        dispatch(stateSignUpAddress(address));
+      dispatch(stateSignUpAddress(address));
     } catch (e) {
       throw e;
     }
@@ -95,7 +139,7 @@ const signInProfile = (email, password) => {
   return async (dispatch) => {
     try {
       dispatch(stateSignValidate());
-      const user = await firebase.auth.signInWithEmailAndPassword(email,password);
+      const user = await firebase.auth.signInWithEmailAndPassword(email, password);
       const docProfile = await firebase.firestore.collection('profiles').doc(user.uid)
       const profile = await docProfile.get();
       console.log('user:', user);
@@ -113,6 +157,8 @@ const signInProfile = (email, password) => {
 };
 
 export default {
+  signProfile,
+  signOutProfile,
   signInProfile,
   signUpProfile,
   signUpAddressByCep,

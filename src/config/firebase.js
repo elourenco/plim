@@ -12,9 +12,13 @@ const config = {
 }
 
 const firebase = Firebase.initializeApp(config);
-const auth = Firebase.auth()
-const firestore = Firebase.firestore();
-firestore.settings({timestampsInSnapshots: true})
+const auth = firebase.auth()
+const firestore = firebase.firestore();
+
+Firebase.firestore.setLogLevel('debug');
+
+firestore.settings({timestampsInSnapshots: true});
+firestore.enableNetwork(true);
 
 export default {
   firebase,

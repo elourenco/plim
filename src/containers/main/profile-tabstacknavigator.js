@@ -1,24 +1,26 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Template from '../../screens/template';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import ProfileScreen from '../../screens/profile/profile-screen';
 
 export default StackNavigator(
   {
-    Demo: { screen: Template }
+    Profile: { screen: ProfileScreen }
   }, {
-    initialRouteName: 'Demo',
+    initialRouteName: 'Profile',
     navigationOptions: {
       gesturesEnabled: false,
       showLabel: false,
       headerTintColor: '#ffff',
       headerTitle: 'Perfil',
       headerStyle: {
-        backgroundColor: '#15629b'
+        elevation: 0,
+        backgroundColor: '#0084ec',
+        borderBottomWidth: 0
       },
       tabBarLabel: 'Perfil',
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="account" size={28} color={tintColor} />
+        <Icon name="user" size={28} color={tintColor} />
       ),
     }
   }

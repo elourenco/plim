@@ -11,6 +11,26 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case signActions.states.SIGN_OUT_USER: {
+      return { ...state,
+        loading: false,
+        error: null,
+        email: null,
+        cpf: null,
+        name: null,
+        address: null
+      }
+    }
+    case signActions.states.SIGN_PROFILE: {
+      return { ...state,
+        loading: false, 
+        cpf: action.profile.cpf, 
+        name: action.profile.name, 
+        email: action.profile.email,
+        address: action.profile.address,
+        error: null
+      };
+    }
     case signActions.states.SIGN_IN_PROFILE: {
       return { ...state,
         loading: false, 

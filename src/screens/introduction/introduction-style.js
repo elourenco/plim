@@ -5,6 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    padding: 15
   },
   welcome:{
     flex: 1,

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-
+import { bindActionCreators } from 'redux';
+import { signActions } from '../../redux/actions';
+import LoadingView from '../../components/loading-view';
 import styles from './splash-style';
 
 class SplashScreen extends Component {
@@ -13,7 +15,9 @@ class SplashScreen extends Component {
   async bootstrapAsync() {
     const userUID = await AsyncStorage.getItem('@user.uid');
     if (userUID) {
-      this.props.navigation.navigate('MainContainers');
+      this.props.signProfile(userUID).then(() =>{
+        this.props.navigation.navigate('MainContainers');
+      });
     } else {
       this.props.navigation.navigate('AuthContainers');
     }
@@ -21,11 +25,19 @@ class SplashScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator />
-      </View>
+      <LoadingView />
     );
   }
 }
 
-export default connect()(SplashScreen);
+function mapStateToProps(state) {
+  return {
+    profile: state.profile
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(signActions.actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);

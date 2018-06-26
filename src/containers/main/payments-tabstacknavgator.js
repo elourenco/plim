@@ -1,13 +1,13 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import Template from '../../screens/template';
+import PaymentScreen from '../../screens/payments/payment-screen';
 
 export default StackNavigator(
   {
-    Demo: { screen: Template }
+    Payments: { screen: PaymentScreen }
   }, {
-    initialRouteName: 'Demo',
+    initialRouteName: 'Payments',
     navigationOptions: {
       gesturesEnabled: false,
       showLabel: false,

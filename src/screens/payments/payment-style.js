@@ -26,18 +26,23 @@ export default StyleSheet.create({
   },
   monthDetails: {
     flex: 1,
-    margin: 8,
+    padding: 8,
     flexDirection: 'column',
   },
   monthDetailsTitleText: {
     fontSize: 20, 
-    textAlign: 'left'
+    textAlign: 'left',
   },
   slideMonth: {
     flex:1,
-    marginTop: 10,
+    flexDirection: 'column',
     borderRadius: 8,
     overflow: 'visible',
     backgroundColor: 'white', 
+    // overflow: 'hidden'
   },
+  stretch:{
+    width: slideWidth,
+    margin: 8,
+  }
 });

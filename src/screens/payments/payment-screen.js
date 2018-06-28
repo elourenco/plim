@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View, Image, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Carousel from 'react-native-snap-carousel';
 import LinearGradient from 'react-native-linear-gradient';
+import { LineChart, YAxis, Grid } from 'react-native-svg-charts'
 import lnBackgroundColor from '../../config/linear-gradient-colors';
+import moment from 'moment';
 
 import styles from './payment-style';
 import { sliderWidth, itemWidth } from './payment-style';
@@ -12,12 +14,14 @@ class PaymentScreen extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      slider1ActiveSlide: 0
-};
-    this.data = [];
-    for (let i = 1; i <= 12; i++) {
-      this.data.push({ key: i, num: i });
+      slider1ActiveSlide: moment().month()
+    };
+    this.data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
+    this.months = [];
+    for (let i = 0; i < 11; i++) {
+      this.months.push({ key: i, month: moment().month(i).format('MMMM YYYY') });
     }
+
   };
 
   space() {
@@ -27,7 +31,12 @@ class PaymentScreen extends Component {
   _renderItem({ item, index }) {
     return (
       <View style={styles.slideMonth}>
-        <Text style={{ fontSize: 20, textAlign: 'center' }}>{item.num}</Text>
+        <Text style={{ fontSize: 20, textAlign: 'center' }}>{item.month}</Text>
+        <Image
+          style={styles.stretch}
+          resizeMode='contain'
+          source={require('../../img/graficoLinhaMes.png')}
+        />
       </View>
     );
   }
@@ -38,7 +47,7 @@ class PaymentScreen extends Component {
         <View style={styles.monthChartContainer}>
           <Carousel
             ref={c => this._slider1Ref = c}
-            data={this.data}
+            data={this.months}
             renderItem={this._renderItem}
             sliderWidth={sliderWidth}
             itemWidth={itemWidth}
@@ -50,25 +59,14 @@ class PaymentScreen extends Component {
             autoplay={false}
             onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index })}
           />
-          {/* <Pagination
-            dotsLength={this.data.length}
-            activeDotIndex={this.state.slider1ActiveSlide}
-            containerStyle={{ paddingVertical: 8 }}
-            dotColor={'rgba(255, 255, 255, 0.92)'}
-            dotStyle={styles.paginationDot}
-            inactiveDotColor='#000'
-            inactiveDotOpacity={0.2}
-            inactiveDotScale={0.6}
-            carouselRef={this._slider1Ref}
-            tappableDots={!!this._slider1Ref}
-          /> */}
+
         </View>
         <View style={styles.monthDetails}>
-          <Text style={styles.monthDetailsTitleText}>Extrato do mês:</Text>
+          <Text style={styles.monthDetailsTitleText}>Extrato</Text>
           <FlatList
-            data={this.data}
+            data={this.months}
             renderItem={({ item }) =>
-              <Text style={{ fontSize: 20, textAlign: 'center' }}>{item.num}</Text>
+              <Text style={{ fontSize: 20, textAlign: 'center' }}>{item.month}</Text>
             }
           />
         </View>

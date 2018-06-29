@@ -30,8 +30,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   monthDetailsTitleText: {
-    fontSize: 20, 
+    fontSize: 20,
+    marginLeft: 10,
+    fontWeight: 'bold',
     textAlign: 'left',
+    color: '#fff'
   },
   slideMonth: {
     flex:1,
@@ -42,7 +45,57 @@ export default StyleSheet.create({
     // overflow: 'hidden'
   },
   stretch:{
-    width: slideWidth,
+    width: slideWidth - 20,
     margin: 8,
+  },
+  itemStatement: {
+    flex: 1,
+    margin: 3,
+    height: 90,
+    borderRadius: 4,
+    flexDirection: 'row',
+    backgroundColor: '#fff'
+  },
+  itemStatementLogoStore: {
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemStatementDesc: {
+    flex: 1,
+    margin: 5,
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  itemStatementValue: {
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  itemStatementDescStore: {
+    fontSize: 12,
+  },
+  itemStatementDescStoreLoc: {
+    fontSize: 10,
+    fontStyle: 'italic',
+    fontWeight: '100',
+  },
+  itemStatementDescProd: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  itemStatementDescDate: {
+    fontSize: 12,
+    fontWeight: '100',
+  },
+  itemStatementValueLoop: {
+
+  },
+  itemStatementValueTotal: {
+    fontSize: 14,
+    fontWeight: 'bold',
   }
 });

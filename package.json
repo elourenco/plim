@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "br-validations": "^0.3.1",
+    "currency-formatter": "^1.4.2",
     "firebase": "^4.13.1",
     "moment": "^2.22.1",
     "native-base": "^2.4.2",

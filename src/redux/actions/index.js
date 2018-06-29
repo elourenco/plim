@@ -4,6 +4,8 @@ import signAction from './auth/auth-sign';
 import authType from './auth/auth-types';
 import purchaseAction from './purchase/purchase-action';
 import purchaseType from './purchase/purchase-type';
+import paymentAction from './payment/payment-action';
+import paymentType from './payment/payment-type';
 
 
 const applicationActions = {
@@ -27,9 +29,16 @@ const purchaseActions = {
   }
 }
 
+const paymentActions = {
+  actions: paymentAction,
+  states: {
+    ...paymentType
+  }
+}
 
 export {
   applicationActions,
   signActions,
-  purchaseActions
+  purchaseActions,
+  paymentActions
 };

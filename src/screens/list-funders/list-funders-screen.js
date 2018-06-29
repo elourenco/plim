@@ -10,6 +10,8 @@ import styles from './list-funders-style';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
 import { purchaseActions } from '../../redux/actions';
 import LoadingView from '../../components/loading-view';
+import currencyFormatter from 'currency-formatter';
+
 
 class ListFundersScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -53,11 +55,11 @@ class ListFundersScreen extends Component {
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Credito: </Text>
-              <Text style={styles.valueText}>R$ {item.credit}</Text>
+              <Text style={styles.valueText}>{currencyFormatter.format(item.credit, { locale: 'pt-BR' })}</Text>
             </View>
             <View style={styles.viewTextContainer}>
               <Text style={styles.labelText}>Saldo: </Text>
-              <Text style={styles.valueText}>R$ {item.balance}</Text>
+              <Text style={styles.valueText}>{currencyFormatter.format(item.balance, { locale: 'pt-BR' })}</Text>
             </View>
           </View>
         </View>

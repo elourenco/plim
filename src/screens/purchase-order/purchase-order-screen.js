@@ -10,6 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import lnBackgroundColor from '../../config/linear-gradient-colors';
 import { purchaseActions } from '../../redux/actions';
 import styles from './purchase-order-style';
+import currencyFormatter from 'currency-formatter';
 
 class PurchaseOrder extends Component {
 
@@ -31,8 +32,8 @@ class PurchaseOrder extends Component {
           </View>
           <View style={styles.infoPurchases}>
             <Text style={styles.fieldKey}>Produtos: <Text style={styles.fieldValue}>{purchase.description}</Text></Text>
-            <Text style={styles.fieldKey}>Valor Total: <Text style={styles.fieldValue}>{purchase.price}</Text></Text>
-            <Text style={styles.fieldKey}>Parcelas: <Text style={styles.fieldValue}>{purchase.numberOfLoop} x {purchase.price/purchase.numberOfLoop}</Text></Text>
+            <Text style={styles.fieldKey}>Valor Total: <Text style={styles.fieldValue}>{currencyFormatter.format(purchase.price, { locale: 'pt-BR' })}</Text></Text>
+            <Text style={styles.fieldKey}>Parcelas: <Text style={styles.fieldValue}>{purchase.numberOfLoop > 1 ? purchase.numberOfLoop + ' x ' +  currencyFormatter.format((purchase.price / purchase.numberOfLoop), { locale: 'pt-BR' }) : 'À vista'}</Text></Text>
             <Text style={styles.fieldKey}>Data da compra: <Text style={styles.fieldValue}>{ moment(purchase.createDate.toDate()).format("DD [de] MMMM, YYYY") }</Text></Text>
           </View>
           <Button style={{ margin: 15 }}

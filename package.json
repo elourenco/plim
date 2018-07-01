@@ -9,7 +9,7 @@
   "dependencies": {
     "br-validations": "^0.3.1",
     "currency-formatter": "^1.4.2",
-    "firebase": "^4.13.1",
+    "firebase": "^5.2.0",
     "moment": "^2.22.1",
     "native-base": "^2.4.2",
     "node-viacep": "^1.1.0",
@@ -31,7 +31,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "@firebase/app-types": "^0.3.0",
+    "@firebase/app-types": "^0.3.2",
     "babel-core": "^6.26.3",
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",

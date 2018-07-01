@@ -51,7 +51,7 @@ export default StyleSheet.create({
   itemStatement: {
     flex: 1,
     margin: 3,
-    height: 90,
+    height: 100,
     borderRadius: 4,
     flexDirection: 'row',
     backgroundColor: '#fff'

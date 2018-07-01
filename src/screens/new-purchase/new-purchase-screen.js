@@ -16,6 +16,7 @@ class NewPurchaseScreen extends Component {
     const { params } = navigation.state;
     return {
       title: params ? params.name : 'Nova Compra',
+      headerTruncatedBackTitle: 'Voltar'
     }
   };
 

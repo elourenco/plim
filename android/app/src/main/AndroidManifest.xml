@@ -24,9 +24,6 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="92cc08be085d9ec0313b337d0c8569b418543a1f" />
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="92cc08be085d9ec0313b337d0c8569b418543a1f" />
     </application>
 
 </manifest>

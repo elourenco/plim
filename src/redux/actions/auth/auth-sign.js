@@ -59,7 +59,7 @@ const signProfile = () => {
     try {
       dispatch(stateSignValidate());
       const userUID = await AsyncStorage.getItem('@user.uid');
-      const profile = await firebase.firestore.collection('profiles').doc(userUID).get();
+      const profile = await firebase.firestore.collection('profiles').doc(userUID).get({source: 'server'});
       dispatch(stateSignProfile(profile.data()));
     }
     catch(e) {
@@ -141,7 +141,7 @@ const signInProfile = (email, password) => {
       dispatch(stateSignValidate());
       const auth = await firebase.auth.signInWithEmailAndPassword(email, password);
       const docProfile = await firebase.firestore.collection('profiles').doc(auth.user.uid)
-      const profile = await docProfile.get();
+      const profile = await docProfile.get({source: 'server'});
       console.log('user:', auth.user);
       console.log('profile:', profile.data());
       if (auth && profile) {

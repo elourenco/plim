@@ -103,8 +103,10 @@ const signUpProfile = (profile) => {
     try {
       const { cpf, name, email } = profile;
       dispatch(stateSignValidate());
-      const auth = await firebase.auth.createUserWithEmailAndPassword(profile.email, profile.password)
+      const auth = await firebase.auth.createUserAndRetrieveDataWithEmailAndPassword(profile.email, profile.password)
+      console.log('>>>>>> Auth',auth);
       const profileDb = await firebase.firestore.collection('profiles').doc(auth.user.uid).set({ cpf, name, email })
+      
       if (auth) {
         await AsyncStorage.setItem('@user.uid', auth.user.uid);
         dispatch(stateSignUpProfile({ cpf, name, email }));
@@ -139,7 +141,7 @@ const signInProfile = (email, password) => {
   return async (dispatch) => {
     try {
       dispatch(stateSignValidate());
-      const auth = await firebase.auth.signInWithEmailAndPassword(email, password);
+      const auth = await firebase.auth.signInAndRetrieveDataWithEmailAndPassword(email, password);
       const docProfile = await firebase.firestore.collection('profiles').doc(auth.user.uid)
       const profile = await docProfile.get({source: 'server'});
       console.log('user:', auth.user);

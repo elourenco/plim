@@ -68,8 +68,7 @@ class ProfileValidationScreen extends Component {
             autoFocus={true}
             maxLength={11}
             value={this.state.cpf}
-            onChangeText={(text) => this.setState({ cpf: text })}
-            onEndEditing={(e) => console.log('>>>>>', e.nativeEvent.text)} />
+            onChangeText={(text) => this.setState({ cpf: text })} />
         </Item>
         <Item floatingLabel>
           <Label style={{ color: 'white' }} >Nome completo</Label>
